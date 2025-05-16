@@ -5,14 +5,16 @@ import com.bellwe.jobsearchcrud.dto.JobApplicationResponseDTO;
 import com.bellwe.jobsearchcrud.dto.PatchJobApplicationDTO;
 import com.bellwe.jobsearchcrud.dto.UpdateJobApplicationDTO;
 import com.bellwe.jobsearchcrud.entity.JobApplication;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class JobApplicationMapper {
 
     // return a response DTO from the JobApplication entity
-    public static JobApplicationResponseDTO toResponseDto(JobApplication jobApplication) {
+    public JobApplicationResponseDTO toResponseDto(JobApplication jobApplication) {
 
         if (jobApplication == null) return null;
 
@@ -28,15 +30,15 @@ public class JobApplicationMapper {
     }
 
     // return a list of response DTOs from a list of JobApplication entities
-    public static List<JobApplicationResponseDTO> toResponseDtoList(List<JobApplication> jobApplicationList) {
+    public List<JobApplicationResponseDTO> toResponseDtoList(List<JobApplication> jobApplicationList) {
 
         return jobApplicationList.stream()
-                .map(JobApplicationMapper::toResponseDto)
+                .map(this::toResponseDto)
                 .collect(Collectors.toList());
     }
 
     // return a JobApplication entity from a Create DTO
-    public static JobApplication toJobApplication(CreateJobApplicationDTO dto) {
+    public JobApplication toJobApplication(CreateJobApplicationDTO dto) {
 
         if (dto == null) return null;
 
@@ -51,7 +53,7 @@ public class JobApplicationMapper {
     }
 
     // update a JobApplication entity from an Update DTO
-    public static void updateJobApplication(JobApplication jobApplication, UpdateJobApplicationDTO dto) {
+    public void updateJobApplication(JobApplication jobApplication, UpdateJobApplicationDTO dto) {
 
         jobApplication.setJobTitle(dto.getJobTitle());
         jobApplication.setCompany(dto.getCompany());
@@ -62,7 +64,7 @@ public class JobApplicationMapper {
     }
 
     // patch a JobApplication entity from a Patch DTO
-    public static void patchJobApplication(JobApplication jobApplication, PatchJobApplicationDTO dto) {
+    public void patchJobApplication(JobApplication jobApplication, PatchJobApplicationDTO dto) {
 
         if (dto.getJobTitle() != null) jobApplication.setJobTitle(dto.getJobTitle());
         if (dto.getCompany() != null) jobApplication.setCompany(dto.getCompany());

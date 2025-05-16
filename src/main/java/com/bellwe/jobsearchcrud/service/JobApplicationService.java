@@ -1,18 +1,24 @@
 package com.bellwe.jobsearchcrud.service;
 
+import com.bellwe.jobsearchcrud.dto.CreateJobApplicationDTO;
+import com.bellwe.jobsearchcrud.dto.JobApplicationResponseDTO;
+import com.bellwe.jobsearchcrud.dto.PatchJobApplicationDTO;
+import com.bellwe.jobsearchcrud.dto.UpdateJobApplicationDTO;
 import com.bellwe.jobsearchcrud.entity.JobApplication;
 
 import java.util.List;
 
 public interface JobApplicationService {
 
-    List<JobApplication> findAll();
+    List<JobApplicationResponseDTO> findAll();
 
-    JobApplication findById(int id);
+    JobApplicationResponseDTO findById(int id);
 
-    JobApplication save(JobApplication jobApplication);
+    JobApplicationResponseDTO save(CreateJobApplicationDTO jobApplicationDTO);
 
-    JobApplication update(int id, JobApplication jobApplication);
+    JobApplicationResponseDTO update(int id, UpdateJobApplicationDTO jobApplicationDTO);
+
+    JobApplicationResponseDTO patch(int id, PatchJobApplicationDTO jobApplicationDTO);
 
     void deleteById(int id);
 
