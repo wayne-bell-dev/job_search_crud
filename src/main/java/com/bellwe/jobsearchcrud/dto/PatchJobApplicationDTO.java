@@ -14,6 +14,26 @@ public class PatchJobApplicationDTO {
 
     private String notes;
 
+    // validate patch dto fields
+    public void validate() {
+
+        if (jobTitle != null && jobTitle.isBlank()) {
+            throw new IllegalArgumentException("Job title cannot be blank");
+        }
+        if (company != null && company.isBlank()) {
+            throw new IllegalArgumentException("Company cannot be blank");
+        }
+        if (dateApplied != null && dateApplied.isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException("Date applied must be in the past or present");
+        }
+        if (status != null && status.length() > 100) {
+            throw new IllegalArgumentException("Status cannot exceed 100 characters");
+        }
+        if (notes != null && notes.length() > 1000) {
+            throw new IllegalArgumentException("Notes cannot exceed 1000 characters");
+        }
+    }
+
     public String getJobTitle() {
         return jobTitle;
     }
