@@ -60,6 +60,9 @@ public class JobApplicationServiceImpl implements JobApplicationService {
 
     @Override
     public JobApplicationResponseDTO patch(int id, PatchJobApplicationDTO jobApplicationDTO) {
+
+        jobApplicationDTO.validate();
+
         JobApplication patchApplication = jobApplicationRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Did not find the job application by id - " + id));
 
